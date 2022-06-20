@@ -37,8 +37,13 @@ class AssetsNinja{
             "name" => "sohan",
             "url" => "sohan.com"
         ];
+        $more_data = [
+            "name" => "sohan Chowdhury",
+            "url" => "sohan.com2"
+        ];
 
         wp_localize_script( 'asn-main-js', 'sitedata', $data );
+        wp_localize_script( 'asn-main-js', 'more_data', $more_data );
 
     }
 }
