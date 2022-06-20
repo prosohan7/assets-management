@@ -18,7 +18,7 @@ define( 'ASN_ASSETS_PUBLIC_DIR', plugin_dir_url( __FILE__ )."assets/public/" );
 class AssetsNinja{
     function __construct() {
 
-        $this->$version = time();
+        $this->version = time();
 
         add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
         add_action( 'wp_enqueue_scripts', array( $this, 'load_front_assets' ) );
@@ -33,7 +33,12 @@ class AssetsNinja{
 
         wp_enqueue_script( 'asn-main-js', ASN_ASSETS_PUBLIC_DIR ."js/main.js", array('jquery'), $this->version, true );
 
+        $data = [
+            "name" => "sohan",
+            "url" => "sohan.com"
+        ];
 
+        wp_localize_script( 'asn-main-js', 'sitedata', $data );
 
     }
 }
