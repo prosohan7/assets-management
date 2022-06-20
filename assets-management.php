@@ -41,9 +41,13 @@ class AssetsNinja{
             "name" => "sohan Chowdhury",
             "url" => "sohan.com2"
         ];
+        $translated_string = [
+            "greeting" => __( 'Hello world', 'assetsninja'),
+        ];
 
         wp_localize_script( 'asn-main-js', 'sitedata', $data );
         wp_localize_script( 'asn-main-js', 'more_data', $more_data );
+        wp_localize_script( 'asn-main-js', 'translated_data', $translated_string );
 
     }
 }
