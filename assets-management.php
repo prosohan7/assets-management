@@ -30,10 +30,21 @@ class AssetsNinja{
         load_plugin_textdomain( 'assetsninja', false, plugin_dir_url(__FILE__)."/languages" );
     }
 
-    function load_admin_assets(){
-        wp_enqueue_style( 'asn-admin-css', ASN_ASSETS_ADMIN_DIR ."css/admin.css", null, time() );
+    function load_admin_assets($screen){
+        $_screen = get_current_screen();
+        echo '<pre>';
+        print_r( $_screen );
+        
+        echo '</pre>';
+        
+        die();
 
-        wp_enqueue_script( 'asn-admin-js', ASN_ASSETS_ADMIN_DIR ."js/admin.js", array('jquery'), $this->version, true );
+        if( 'edit.php' == $screen && 'page' == $_screen->post_type ) {
+            wp_enqueue_style( 'asn-admin-css', ASN_ASSETS_ADMIN_DIR ."css/admin.css", null, time() );
+            wp_enqueue_script( 'asn-admin-js', ASN_ASSETS_ADMIN_DIR ."js/admin.js", array('jquery'), $this->version, true );
+        }
+        
+
     } 
     function load_front_assets(){
         wp_enqueue_style( 'asn-main-css', ASN_ASSETS_PUBLIC_DIR ."css/main.css", null, time() );
