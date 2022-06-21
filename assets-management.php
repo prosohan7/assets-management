@@ -14,6 +14,7 @@
  */
 
 define( 'ASN_ASSETS_PUBLIC_DIR', plugin_dir_url( __FILE__ )."assets/public/" );
+define( 'ASN_ASSETS_ADMIN_DIR', plugin_dir_url( __FILE__ )."assets/admin/" );
 
 class AssetsNinja{
     function __construct() {
@@ -22,12 +23,18 @@ class AssetsNinja{
 
         add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
         add_action( 'wp_enqueue_scripts', array( $this, 'load_front_assets' ) );
+        add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_assets' ) );
     }
 
     function load_textdomain() {
         load_plugin_textdomain( 'assetsninja', false, plugin_dir_url(__FILE__)."/languages" );
     }
 
+    function load_admin_assets(){
+        wp_enqueue_style( 'asn-admin-css', ASN_ASSETS_ADMIN_DIR ."css/admin.css", null, time() );
+
+        wp_enqueue_script( 'asn-admin-js', ASN_ASSETS_ADMIN_DIR ."js/admin.js", array('jquery'), $this->version, true );
+    } 
     function load_front_assets(){
         wp_enqueue_style( 'asn-main-css', ASN_ASSETS_PUBLIC_DIR ."css/main.css", null, time() );
 
