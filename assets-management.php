@@ -32,12 +32,6 @@ class AssetsNinja{
 
     function load_admin_assets($screen){
         $_screen = get_current_screen();
-        echo '<pre>';
-        print_r( $_screen );
-        
-        echo '</pre>';
-        
-        die();
 
         if( 'edit.php' == $screen && 'page' == $_screen->post_type ) {
             wp_enqueue_style( 'asn-admin-css', ASN_ASSETS_ADMIN_DIR ."css/admin.css", null, time() );
@@ -50,6 +44,13 @@ class AssetsNinja{
         wp_enqueue_style( 'asn-main-css', ASN_ASSETS_PUBLIC_DIR ."css/main.css", null, time() );
 
         wp_enqueue_script( 'asn-main-js', ASN_ASSETS_PUBLIC_DIR ."js/main.js", array('jquery'), $this->version, true );
+
+        $js_files = array(
+            'asn-main-js' => array('path'=>  ASN_ASSETS_PUBLIC_DIR ."js/main.js", 'dep'=>array('jquery'))
+        );
+        foreach( $js_files as $handle=>$fileinfo ){
+            wp_enqueue_script( $handle, $fileinfo['path'], $fileinfo['dep'] );
+        }        
 
         $data = [
             "name" => "sohan",
